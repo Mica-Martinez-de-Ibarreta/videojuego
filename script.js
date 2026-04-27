@@ -95,6 +95,7 @@ function checkForMatch() {
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
     resetTurn();
+  }, 1000);
 }
 
 function handleCardClick(card) {
