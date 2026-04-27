@@ -6,31 +6,32 @@
 
 body {
   min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(160deg, #0f172a, #1e293b);
+  font-family: "Nunito", Arial, sans-serif;
+  background: linear-gradient(160deg, #1a3a2a, #2d6a4f);
   color: #f8fafc;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 24px;
 }
 
 .app {
-  width: min(900px, 100%);
+  width: min(980px, 100%);
 }
 
 .screen {
   display: none;
   text-align: center;
-  background: rgba(15, 23, 42, 0.75);
-  border: 1px solid rgba(148, 163, 184, 0.2);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  background: rgba(26, 58, 42, 0.8);
+  border: 1px solid rgba(241, 250, 238, 0.18);
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
 }
 
 .screen.active {
   display: block;
+  animation: fade-in 0.4s ease;
 }
 
 h1,
@@ -42,22 +43,34 @@ p {
   line-height: 1.5;
 }
 
+.game-title {
+  font-size: clamp(2.1rem, 4vw, 3rem);
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+}
+
+.game-title-small {
+  font-size: clamp(1.5rem, 2.3vw, 2.1rem);
+  margin: 0;
+}
+
 .primary-button {
   margin-top: 18px;
-  background: #22c55e;
-  color: #052e16;
+  background: #52b788;
+  color: #ffffff;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   padding: 12px 20px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
-  transition: transform 0.15s ease, opacity 0.15s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
 .primary-button:hover {
+  background: #40916c;
   transform: translateY(-1px);
-  opacity: 0.95;
 }
 
 .primary-button:active {
@@ -66,20 +79,30 @@ p {
 
 .game-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  gap: 12px;
-  margin-bottom: 16px;
+  gap: 14px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
 }
 
 .moves {
-  font-weight: 700;
+  font-weight: 800;
+  color: #1a3a2a;
+  background: #ffffff;
+  border-radius: 999px;
+  padding: 8px 16px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
 .board {
   display: grid;
-  grid-template-columns: repeat(5, minmax(80px, 1fr));
-  gap: 12px;
+  grid-template-columns: repeat(5, minmax(92px, 120px));
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 720px;
 }
 
 .card {
@@ -88,16 +111,19 @@ p {
   border-radius: 12px;
   cursor: pointer;
   position: relative;
-  perspective: 1000px;
   background: transparent;
+  padding: 0;
+  perspective: 1000px;
 }
 
 .card-inner {
   width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
   transform-style: preserve-3d;
-  transition: transform 0.4s ease;
+  transition: transform 0.55s ease;
 }
 
 .card.flipped .card-inner,
@@ -113,18 +139,19 @@ p {
   align-items: center;
   justify-content: center;
   backface-visibility: hidden;
-  font-size: clamp(28px, 4vw, 42px);
+  font-size: clamp(34px, 4.6vw, 52px);
 }
 
 .card-back {
-  background: linear-gradient(135deg, #06b6d4, #3b82f6);
-  color: #e0f2fe;
-  font-size: clamp(24px, 3vw, 34px);
+  background: #40916c;
+  color: #f1faee;
+  font-size: clamp(26px, 3.2vw, 36px);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.12);
 }
 
 .card-front {
-  background: #f8fafc;
-  color: #0f172a;
+  background: #f1faee;
+  color: #1a3a2a;
   transform: rotateY(180deg);
 }
 
@@ -133,7 +160,24 @@ p {
 }
 
 .card.matched .card-front {
-  background: #dcfce7;
+  background: #b7e4c7;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 900px) {
+  .board {
+    grid-template-columns: repeat(5, minmax(72px, 110px));
+  }
 }
 
 @media (max-width: 640px) {
@@ -141,11 +185,8 @@ p {
     padding: 16px;
   }
 
-  .game-header {
-    flex-direction: column;
-  }
-
   .board {
-    grid-template-columns: repeat(4, minmax(60px, 1fr));
+    grid-template-columns: repeat(4, minmax(64px, 90px));
+    gap: 10px;
   }
 }

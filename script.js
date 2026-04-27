@@ -45,7 +45,7 @@ function createCard(emoji, index) {
 
   card.innerHTML = `
     <span class="card-inner">
-      <span class="card-face card-back">?</span>
+      <span class="card-face card-back">🌿</span>
       <span class="card-face card-front">${emoji}</span>
     </span>
   `;
@@ -95,7 +95,6 @@ function checkForMatch() {
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
     resetTurn();
-  }, 2000);
 }
 
 function handleCardClick(card) {
