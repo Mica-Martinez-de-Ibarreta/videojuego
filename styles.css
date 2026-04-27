@@ -1,0 +1,151 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(160deg, #0f172a, #1e293b);
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.app {
+  width: min(900px, 100%);
+}
+
+.screen {
+  display: none;
+  text-align: center;
+  background: rgba(15, 23, 42, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+.screen.active {
+  display: block;
+}
+
+h1,
+h2 {
+  margin-bottom: 12px;
+}
+
+p {
+  line-height: 1.5;
+}
+
+.primary-button {
+  margin-top: 18px;
+  background: #22c55e;
+  color: #052e16;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 20px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  opacity: 0.95;
+}
+
+.primary-button:active {
+  transform: translateY(1px);
+}
+
+.game-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.moves {
+  font-weight: 700;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(80px, 1fr));
+  gap: 12px;
+}
+
+.card {
+  aspect-ratio: 3 / 4;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  perspective: 1000px;
+  background: transparent;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
+}
+
+.card.flipped .card-inner,
+.card.matched .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backface-visibility: hidden;
+  font-size: clamp(28px, 4vw, 42px);
+}
+
+.card-back {
+  background: linear-gradient(135deg, #06b6d4, #3b82f6);
+  color: #e0f2fe;
+  font-size: clamp(24px, 3vw, 34px);
+}
+
+.card-front {
+  background: #f8fafc;
+  color: #0f172a;
+  transform: rotateY(180deg);
+}
+
+.card.matched {
+  cursor: default;
+}
+
+.card.matched .card-front {
+  background: #dcfce7;
+}
+
+@media (max-width: 640px) {
+  .screen {
+    padding: 16px;
+  }
+
+  .game-header {
+    flex-direction: column;
+  }
+
+  .board {
+    grid-template-columns: repeat(4, minmax(60px, 1fr));
+  }
+}

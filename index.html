@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memotest de Animales</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <section id="welcome-screen" class="screen active">
+        <h1>Memotest de Animales</h1>
+        <p>
+          Encontrá los 10 pares de animales. Podés dar vuelta dos cartas por
+          turno. ¡Ganás cuando descubrís todos los pares!
+        </p>
+        <button id="start-button" class="primary-button">Jugar</button>
+      </section>
+
+      <section id="game-screen" class="screen">
+        <header class="game-header">
+          <h2>Memotest</h2>
+          <p class="moves">Movimientos: <span id="move-counter">0</span></p>
+        </header>
+        <div id="board" class="board" aria-label="Tablero de memotest"></div>
+      </section>
+
+      <section id="final-screen" class="screen">
+        <h2 id="final-title">¡Ganaste!</h2>
+        <p id="final-message">Completaste el juego en 0 movimientos.</p>
+        <button id="restart-button" class="primary-button">Jugar de nuevo</button>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
