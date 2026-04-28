@@ -6,6 +6,7 @@ const finalScreen = document.getElementById("final-screen");
 
 const startButton = document.getElementById("start-button");
 const restartButton = document.getElementById("restart-button");
+const homeButton = document.getElementById("home-button");
 const board = document.getElementById("board");
 const moveCounter = document.getElementById("move-counter");
 const finalTitle = document.getElementById("final-title");
@@ -137,5 +138,17 @@ function startGame() {
   showScreen(gameScreen);
 }
 
+function goToWelcome() {
+  firstCard = null;
+  secondCard = null;
+  lockBoard = false;
+  moves = 0;
+  matchedPairs = 0;
+  updateMoves();
+  board.innerHTML = "";
+  showScreen(welcomeScreen);
+}
+
 startButton.addEventListener("click", startGame);
 restartButton.addEventListener("click", startGame);
+homeButton.addEventListener("click", goToWelcome);
