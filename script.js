@@ -18,6 +18,7 @@ let lockBoard = false;
 let moves = 0;
 let matchedPairs = 0;
 const totalPairs = animals.length;
+const MAX_MOVES = 22;
 
 function showScreen(screen) {
   welcomeScreen.classList.remove("active");
@@ -28,12 +29,10 @@ function showScreen(screen) {
 
 function shuffle(array) {
   const result = [...array];
-
   for (let i = result.length - 1; i > 0; i -= 1) {
     const j = Math.floor(Math.random() * (i + 1));
     [result[i], result[j]] = [result[j], result[i]];
   }
-
   return result;
 }
 
@@ -63,18 +62,43 @@ function resetTurn() {
 
 function updateMoves() {
   moveCounter.textContent = String(moves);
+
+  // Ponemos el contador en rojo cuando quedan 3 o menos movimientos
+  const movesEl = document.getElementById("move-counter");
+  const remaining = MAX_MOVES - moves;
+  if (remaining <= 3) {
+    movesEl.style.color = "#ef4444";
+  } else {
+    movesEl.style.color = "";
+  }
+}
+
+function loseGame() {
+  finalTitle.textContent = "¡Se acabaron los intentos! 🌿";
+  finalTitle.style.color = "#ef4444";
+  finalMessage.textContent = `Usaste los ${MAX_MOVES} movimientos sin encontrar todos los pares. ¡Intentalo de nuevo!`;
+  showScreen(finalScreen);
 }
 
 function finishGame() {
-  finalTitle.textContent = "¡Ganaste!";
-  finalMessage.textContent = `Completaste el juego en ${moves} movimientos.`;
+  finalTitle.textContent = "¡Ganaste! 🎉";
+  finalTitle.style.color = "";
+
+  let msg = `Encontraste todos los pares en ${moves} movimientos.`;
+  if (moves <= 12) {
+    msg += " ¡Memoria extraordinaria! 🏆";
+  } else if (moves <= 18) {
+    msg += " ¡Muy bien! 🌟";
+  } else {
+    msg += " ¡Lo lograste! 🌿";
+  }
+
+  finalMessage.textContent = msg;
   showScreen(finalScreen);
 }
 
 function checkForMatch() {
-  if (!firstCard || !secondCard) {
-    return;
-  }
+  if (!firstCard || !secondCard) return;
 
   const isMatch = firstCard.dataset.animal === secondCard.dataset.animal;
 
@@ -87,7 +111,7 @@ function checkForMatch() {
     resetTurn();
 
     if (matchedPairs === totalPairs) {
-      finishGame();
+      setTimeout(() => finishGame(), 400);
     }
     return;
   }
@@ -96,6 +120,11 @@ function checkForMatch() {
     firstCard.classList.remove("flipped");
     secondCard.classList.remove("flipped");
     resetTurn();
+
+    // Verificamos derrota después de voltear las cartas de vuelta
+    if (moves >= MAX_MOVES && matchedPairs < totalPairs) {
+      setTimeout(() => loseGame(), 300);
+    }
   }, 1000);
 }
 
@@ -121,7 +150,6 @@ function handleCardClick(card) {
 function buildBoard() {
   board.innerHTML = "";
   const deck = shuffle([...animals, ...animals]);
-
   deck.forEach((emoji, index) => {
     board.appendChild(createCard(emoji, index));
   });

@@ -14,6 +14,8 @@
   </head>
   <body>
     <main class="app">
+
+      <!-- PANTALLA 1: Bienvenida -->
       <section id="welcome-screen" class="screen active">
         <div class="animal-bg" aria-hidden="true">
           <span class="animal-float animal-float--1">🐶</span>
@@ -26,15 +28,16 @@
         <h1 class="game-title">Memoria Salvaje</h1>
         <p>
           Encontrá los 10 pares de animales. Podés dar vuelta dos cartas por
-          turno. ¡Ganás cuando descubrís todos los pares!
+          turno. ¡Tenés 22 movimientos para descubrir todos los pares!
         </p>
         <button id="start-button" class="primary-button">Jugar</button>
       </section>
 
+      <!-- PANTALLA 2: Juego -->
       <section id="game-screen" class="screen">
         <header class="game-header">
           <h2 class="game-title game-title-small">Memoria Salvaje</h2>
-          <p class="moves">Movimientos: <span id="move-counter">0</span></p>
+          <p class="moves">Movimientos: <span id="move-counter">0</span> / 22</p>
           <button id="home-button" class="secondary-button" type="button">
             Volver al inicio
           </button>
@@ -42,6 +45,7 @@
         <div id="board" class="board" aria-label="Tablero de memotest"></div>
       </section>
 
+      <!-- PANTALLA 3: Ganaste -->
       <section id="final-screen" class="screen">
         <div class="animal-bg" aria-hidden="true">
           <span class="animal-float animal-float--1">🐶</span>
@@ -55,6 +59,22 @@
         <p id="final-message">Completaste el juego en 0 movimientos.</p>
         <button id="restart-button" class="primary-button">Jugar de nuevo</button>
       </section>
+
+      <!-- PANTALLA 4: Perdiste -->
+      <section id="lose-screen" class="screen">
+        <div class="animal-bg" aria-hidden="true">
+          <span class="animal-float animal-float--1">🐶</span>
+          <span class="animal-float animal-float--2">🐱</span>
+          <span class="animal-float animal-float--3">🦊</span>
+          <span class="animal-float animal-float--4">🐼</span>
+          <span class="animal-float animal-float--5">🦁</span>
+          <span class="animal-float animal-float--6">🐨</span>
+        </div>
+        <h2 id="lose-title">¡Se acabaron los intentos! 🌿</h2>
+        <p id="lose-message">Usaste los 22 movimientos sin encontrar todos los pares.</p>
+        <button id="retry-button" class="primary-button">Intentar de nuevo</button>
+      </section>
+
     </main>
     <script src="script.js"></script>
   </body>
